@@ -1,7 +1,7 @@
 import esbuild from 'esbuild'
 import { copy } from 'esbuild-plugin-copy'
 import { open, readdir } from 'node:fs/promises'
-import { existsSync, mkdirSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 
 // Variables
 const repoPrefix = '/vector_tiles_assets'
@@ -72,6 +72,8 @@ console.log('Building test HTML')
 if (!existsSync(outDir)){
   mkdirSync(outDir)
 }
+// MapLibre runs its worker from a file of its own, see ml.js
+copyFileSync('node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs', `${outDir}/maplibre-gl-worker.mjs`)
 for(const framework of frameworks) {
   const templateHtml = await readFile(`${srcDir}/${framework.name}.html`)
   const topFolders = await readdir(styleDir)
