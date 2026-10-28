@@ -23,8 +23,7 @@ const loader = {
 const frameworks = [
   {
     name: 'ml',
-    longName: 'MapLibre',
-    projections: ['3857'] // Only create test files for the given projections.
+    longName: 'MapLibre'
   },
   {
     name: 'ol', // If no projections array, create test files for all projections.
